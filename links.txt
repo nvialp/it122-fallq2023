@@ -1,0 +1,5 @@
+Git hub cheat sheet link:
+  https://education.github.com/git-cheat-sheet-education.pdf
+
+Intro to Node class notes
+  https://github.com/brendenwest/it122/blob/main/1_intro_to_node.md
