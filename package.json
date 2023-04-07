@@ -1,16 +1,28 @@
 {
-  "name": "nodejs",
+  "name": "it122-springq2023",
   "version": "1.0.0",
-  "description": "",
+  "description": "it 122 javascript 2",
   "main": "index.js",
+  "dependencies": {
+    "data-uri-to-buffer": "^4.0.0",
+    "fetch-blob": "^3.1.5",
+    "node-domexception": "^1.0.0",
+    "node-fetch": "^3.3.0",
+    "formdata-polyfill": "^4.0.10",
+    "web-streams-polyfill": "^3.2.1"
+  },
+  "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": [],
-  "author": "",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nvialp/it122-springq2023.git"
+  },
+  "author": "Nicholas Vialpando",
   "license": "ISC",
-  "dependencies": {
-    "@types/node": "^18.0.6",
-    "node-fetch": "^3.2.6"
-  }
+  "bugs": {
+    "url": "https://github.com/nvialp/it122-springq2023/issues"
+  },
+  "homepage": "https://github.com/nvialp/it122-springq2023#readme"
 }
