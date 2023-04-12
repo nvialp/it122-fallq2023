@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "sample node application for it122",
   "main": "index.js",
+  "type": "module",
   "dependencies": {},
   "devDependencies": {},
   "scripts": {
