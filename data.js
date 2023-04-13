@@ -10,4 +10,4 @@ const getAll = () => {
     return showcase;
 }
 
-export { getAll } 
+export { getAll }
