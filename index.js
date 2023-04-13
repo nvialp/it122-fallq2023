@@ -1,16 +1,32 @@
+import express from 'express';
 import * as http from 'http';
 import * as querystring from 'querystring';
-import * as data from 'data';
+import * as data from './data.js';
 
-const doneReading = (err, data) => {
-    if(err) console.error(err);
-    console.log('2 - done reading file');
-    console.log(data.toString());
-}
+const app = express();
+app.set('port', process.env.PORT || 3000);
+app.use(express.static('./public'));
+// set the view engine to ejs
+app.set('view engine', 'ejs');
 
-console.log("1 - Program Start");
+//defined routes
+app.get('/', (req,res) => {
+  res.render('home', { showcase: data.getAll()});
+});
 
-http.createServer((req,res) => {
+// define 404 handler
+app.use((req,res) => {
+ res.type('text/plain'); 
+ res.status(404);
+ res.send('404 - Not found');
+});
+
+//started app
+app.listen(app.get('port'), () => {
+  console.log('Express started'); 
+});
+
+/*http.createServer((req,res) => {
     var path = req.url.toLowerCase();    
     switch(path) {
         case '/':
@@ -26,4 +42,6 @@ http.createServer((req,res) => {
             res.end('Not found');
             break;
     }    
-}).listen(process.env.PORT || 3000);
+}).listen(process.env.PORT || 3000);*/
+
+
