@@ -1,4 +1,15 @@
-const http = require("http"); 
+import * as http from 'http';
+import * as querystring from 'querystring';
+import * as data from 'data';
+
+const doneReading = (err, data) => {
+    if(err) console.error(err);
+    console.log('2 - done reading file');
+    console.log(data.toString());
+}
+
+console.log("1 - Program Start");
+
 http.createServer((req,res) => {
     var path = req.url.toLowerCase();    
     switch(path) {
