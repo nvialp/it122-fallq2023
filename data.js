@@ -10,4 +10,9 @@ const getAll = () => {
     return showcase;
 }
 
-export { getAll }
+const getItem = (name) => {
+    return showcase.name;
+}
+
+export { getItem };
+export { getAll };
