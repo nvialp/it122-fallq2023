@@ -11,7 +11,7 @@ app.set('view engine', 'ejs');
 
 //defined routes
 app.get('/', (req,res) => {
-  res.render('home', { showcase: data.getAll()});
+  res.render('home', { rovers: data.getAll()});
 });
 
 // define 404 handler
