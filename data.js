@@ -11,7 +11,7 @@ const getAll = () => {
 }
 
 const getItem = (name) => {
-    return rovers.name;
+    return rovers.find((rover) => rover.name === name);
 }
 
 export { getItem };
