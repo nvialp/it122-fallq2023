@@ -24,4 +24,4 @@ const roverSchema = new Schema({
  tools: Number
 });
 
-export const Rover = mongoose.model('Rover', roverSchema);
+export const Rovers = mongoose.model('Rovers', roverSchema);
