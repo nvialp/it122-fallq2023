@@ -7,11 +7,11 @@ let rovers = [
 ]
 
 const getAll = () => {
-    return showcase;
+    return rovers;
 }
 
 const getItem = (name) => {
-    return showcase.name;
+    return rovers.name;
 }
 
 export { getItem };
