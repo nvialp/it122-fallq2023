@@ -21,7 +21,7 @@ const roverSchema = new Schema({
  landed: String,
  speed: String,
  mass: String,
- tools: int32
+ tools: int
 });
 
 export const Rover = mongoose.model('Rover', roverSchema);
