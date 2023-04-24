@@ -23,7 +23,7 @@ app.get('/', (req, res, next) => {
 app.get('/rover/:name', (req, res, next) => {
     Rovers.findOne({ "name": req.params.name }).lean()
         .then((rover) => {
-            res.render('details', {result: rover} );
+            res.render('detail', {rover: rover} );
             })
         .catch(err => next(err));
 });
