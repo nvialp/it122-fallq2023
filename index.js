@@ -20,6 +20,14 @@ app.get('/', (req, res, next) => {
       .catch(err => next(err))
 });
 
+app.get('/rover/:name', (req, res, next) => {
+    Rovers.findOne({ "name": req.params.name }).lean()
+        .then((rover) => {
+            res.render('details', {result: rover} );
+            })
+        .catch(err => next(err));
+});
+
 //defined routes
 /*app.get('/', (req,res) => {
   res.render('home', { rovers: data.getAll()});

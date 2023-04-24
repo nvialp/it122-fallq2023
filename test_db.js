@@ -5,3 +5,10 @@ Rovers.find({}).lean()
     console.log(rovers);
   })
   .catch(err => next(err));
+
+// return a single record
+Rovers.findOne({"name": "Curiosity" }).lean()
+  .then((rover) => {
+      console.log(rover);;
+  })
+  .catch(err => next(err));
