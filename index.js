@@ -11,17 +11,17 @@ app.use(express.static('./public'));
 app.set('view engine', 'ejs');
 
 //defined routes with mongodb
-/*app.get('/', (req, res, next) => {
+app.get('/', (req, res, next) => {
     Rovers.find({}).lean()
       .then((rovers) => {
         // respond to browser only after db query completes
         res.render('home', { rovers });
       })
       .catch(err => next(err))
-});*/
+});
 
 //defined routes
-app.get('/', (req,res) => {
+/*app.get('/', (req,res) => {
   res.render('home', { rovers: data.getAll()});
 });
 
@@ -29,7 +29,7 @@ app.get('/rover/:name', (req, res) => {
     const name = req.params.name;
 
     res.render('detail', { rover: data.getItem(name)});
-})
+})*/
 
 // define 404 handler
 app.use((req,res) => {
