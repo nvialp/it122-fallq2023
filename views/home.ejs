@@ -5,7 +5,7 @@
         </h1>
 
         <% rovers.forEach(function(rovers) { %>
-            <li> <a href = "detail.ejs"><%= rovers.name %> </a></li>
+            <li> <a href = "/rover/<%= rovers.name%>"><%= rovers.name %> </a></li>
         <% }); %>
     </body>
 </html>

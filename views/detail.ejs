@@ -1,11 +1,17 @@
 <html>
-    <body>
-        <h1>
-            rovers  name
-        </h1>
 
-        <% rovers.forEach(function(rovers) { %>
-            <li> <%= rovers.name %> </li>
-        <% }); %>
-    </body>
+  
+  <body>
+  
+    <h1>Name: <%= rover.name %></h1>
+    <li>Landed: <%= rover.landed %></li>
+    <li>Speed: <%= rover.speed %></li>
+    <li>Mass: <%= rover.mass %></li>
+    <li>Tools: <%= rover.tools %></li>
+
+    
+
+    <p><a href="/">Back to Home Page</a></p>
+
+  </body>
 </html>

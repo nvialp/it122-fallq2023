@@ -14,6 +14,12 @@ app.get('/', (req,res) => {
   res.render('home', { rovers: data.getAll()});
 });
 
+app.get('/rover/:name', (req, res) => {
+    const name = req.params.name;
+
+    res.render('detail', { rover: data.getItem(name)});
+})
+
 // define 404 handler
 app.use((req,res) => {
  res.type('text/plain'); 
