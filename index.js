@@ -3,12 +3,15 @@ import * as http from 'http';
 import * as querystring from 'querystring';
 import * as data from './data.js';
 import { Rovers } from "./models/Rovers.js";
+import cors from 'cors';
 
 const app = express();
 app.set('port', process.env.PORT || 3000);
 app.use(express.static('./public'));
-// set the view engine to ejs
-app.set('view engine', 'ejs');
+app.use(express.urlencoded());
+app.use(express.json());
+app.use('/api', cors()); // set Access-Control-Allow-Origin header for api route
+app.set('view engine', 'ejs'); // set the view engine to ejs
 
 //defined routes with mongodb
 app.get('/', (req, res, next) => {
@@ -28,6 +31,44 @@ app.get('/rover/:name', (req, res, next) => {
         .catch(err => next(err));
 });
 
+//api's
+app.get('/api/rovers', (req, res, next) => {
+    Rovers.find((err, results) => {
+        if(err || !results) return next(err);
+        res.json(results);
+    });
+});
+
+app.get('/api/rover/:name', (req, res, next) => {
+    let name = req.params.title;
+    Rovers.FindOne({name: name}, (err, result) => {
+        if(err || !result) {
+            res.status(404).json({"message":"not found"});
+        }
+        else {
+            res.json( result );
+        }
+    });
+});
+
+app.get('/api/delete/:name', (req,res, next) => {
+    Rover.deleteOne({"_name":req.params.name }, (err, result) => {
+        if (err) return next(err);
+        // return # of items deleted
+        console.log(result)
+        res.json({"deleted": result});
+    });
+});
+
+app.get('/api/add/:name/:landed/:speed/:mass/:tools', (req,res, next) => {
+    // find & update existing item, or add new 
+    let name = req.params.name;
+    Rovers.update({ name:name}, {name:name, landed: req.params.landed, speed: req.params.speed, mass:req.params.mass, tools:req.params.tools }, {upsert: true }, (err, result) => {
+        if (err) return next(err);
+        // nModified = 0 for new item, = 1+ for updated item 
+        res.json({updated: result.nModified});
+    });
+});
 //defined routes
 /*app.get('/', (req,res) => {
   res.render('home', { rovers: data.getAll()});
