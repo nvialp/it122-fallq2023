@@ -33,30 +33,33 @@ app.get('/rover/:name', (req, res, next) => {
 
 //api's
 app.get('/api/rovers', (req, res, next) => {
-    Rovers.find((err, results) => {
-        if(err || !results) return next(err);
-        res.json(results);
+    Rovers.find({}).then((err, result) => {
+        if(err) {
+            res.send(err);
+        }
+        res.json(result);
     });
 });
 
 app.get('/api/rover/:name', (req, res, next) => {
-    let name = req.params.title;
-    Rovers.FindOne({name: name}, (err, result) => {
-        if(err || !result) {
-            res.status(404).json({"message":"not found"});
-        }
-        else {
-            res.json( result );
-        }
-    });
+    let name = req.params.name;
+    console.log(name);
+    Rovers.findOne({name: name}).then((rover) => {
+        res.json(rover);
+        })
+    .catch(err => next(err));
 });
 
 app.get('/api/delete/:name', (req,res, next) => {
-    Rover.deleteOne({"_name":req.params.name }, (err, result) => {
-        if (err) return next(err);
+    Rovers.deleteOne({"_name":req.params.name }).then((err, result) => {
+        if (err) {
+            return next(err);
+        }
+        else {
         // return # of items deleted
         console.log(result)
         res.json({"deleted": result});
+        }
     });
 });
 
