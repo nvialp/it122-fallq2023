@@ -53,7 +53,7 @@ app.get('/api/rover/:name', (req, res, next) => {
 });
 
 app.get('/api/delete/:name', (req,res, next) => {
-    Rovers.deleteOne({"_name":req.params.name }).then((err, result) => {
+    Rovers.deleteOne({"name":req.params.name }).then((err, result) => {
         if (err) {
             return next(err);
         }

@@ -4,7 +4,20 @@
             Mars Rovers (React)
         </h1>
 
-        <% rovers.forEach(function(rovers) { %>
+<div id="root"></div>
+
+<script type="text/babel">
+    
+    const rovers(props) {
+        
+        const listRovers = props.data.map((rover) =>
+        <li key={rovers.name}>
+            {item.title}
+        </li>);
+        return <ul>{listItems}</ul>
+                
+                <h1><% rovers.forEach(function(rovers) { %></h1>
+                    
             <li> <a href = "/rover/<%= rovers.name%>"><%= rovers.name %> </a></li>
         <% }); %>
     </body>
