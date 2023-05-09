@@ -1,3 +1,5 @@
+'use strict';
+
 import express from 'express';
 import * as http from 'http';
 import * as querystring from 'querystring';
