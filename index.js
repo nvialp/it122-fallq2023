@@ -20,7 +20,7 @@ app.get('/', (req, res, next) => {
     Rovers.find({}).lean()
       .then((rovers) => {
         // respond to browser only after db query completes
-        res.render('home', { rovers });
+        res.render('home', { rovers:JSON.stringify(rovers)});
       })
       .catch(err => next(err))
 });

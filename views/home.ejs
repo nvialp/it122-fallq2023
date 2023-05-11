@@ -1,24 +1,41 @@
+<!DOCTYPE html>
+
 <html>
+
+<head>
+    <title>Mars Rovers App with React</title>
+    <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+    
     <body>
         <h1>
             Mars Rovers (React)
         </h1>
 
-<div id="root"></div>
+        <div id="root"></div>
 
-<script type="text/babel">
+        <script type="text/babel">
+            
     
-    const rovers(props) {
-        
-        const listRovers = props.data.map((rover) =>
-        <li key={rovers.name}>
-            {item.title}
-        </li>);
-        return <ul>{listItems}</ul>
+            function Home(props) { 
+                return (
+                    <div>
+                        <ul>
+                            {props.data.map(rover => (
+                                <li key={rover.name}>
+                                    <a href={`/rover/${rover.name}`}>{rover.name}</a>
+                                </li>
+                            ))}                
+                        </ul>
+                    </div>
+                    );
+            }
                 
-                <h1><% rovers.forEach(function(rovers) { %></h1>
-                    
-            <li> <a href = "/rover/<%= rovers.name%>"><%= rovers.name %> </a></li>
-        <% }); %>
+            const rovers = <%- rovers %>;
+            ReactDOM.render(<Home data={rovers} />, document.getElementById('root'));
+            
+        </script>
     </body>
 </html>
