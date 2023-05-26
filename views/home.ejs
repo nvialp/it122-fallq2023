@@ -18,8 +18,18 @@
 
         <script type="text/babel">
             
-    
-            function Home(props) { 
+            const RoverDetail = (props) => {
+                return (
+                    <div>
+                        <h3>Rover Details</h3>
+                        <b>name</b> {props.rover.name}
+                    </div>
+                )                
+            }
+            
+            const Home = (props) => {
+                const [currentItem, setCurrentItem] = React.useState({});
+                
                 return (
                     <div>
                         <ul>
@@ -29,6 +39,7 @@
                                 </li>
                             ))}                
                         </ul>
+                        <RoverDetail rover={currentItem} />
                     </div>
                     );
             }
