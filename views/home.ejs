@@ -17,29 +17,40 @@
         <div id="root"></div>
 
         <script type="text/babel">
+
+            const Rovers = (props) => {
+                const listRovers = props.data.map((rover) => <li onClick={props.onClick} key={rover.name}>{rover.name}</li>);
+                
+                return <ul>{listRovers}</ul>
+            }
             
             const RoverDetail = (props) => {
                 return (
                     <div>
                         <h3>Rover Details</h3>
-                        <b>name</b> {props.rover.name}
+                        
+                        <form>
+                            <b>name:</b> <input type="text" name="name" value={props.rover.name || ""} /> <br />
+                        </form>
                     </div>
                 )                
             }
             
             const Home = (props) => {
-                const [currentItem, setCurrentItem] = React.useState({});
+                const [rovers, setRovers] = React.useState({rovers});
+                const [currentRover, setCurrentRover] = React.useState({});
+
+                const selectRover = (event) => {
+                    const found = rovers.find((rover) => {
+                        return rover.name === event.target.innerText;
+                    });
+                    setCurrentRover(found);
+                }
                 
                 return (
                     <div>
-                        <ul>
-                            {props.data.map(rover => (
-                                <li key={rover.name}>
-                                    <a href={`/rover/${rover.name}`}>{rover.name}</a>
-                                </li>
-                            ))}                
-                        </ul>
-                        <RoverDetail rover={currentItem} />
+                        <Rovers rovers={rovers} onClick={selectRover}/>
+                        <RoverDetail rovers={currentRover} />
                     </div>
                     );
             }
