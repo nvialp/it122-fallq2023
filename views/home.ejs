@@ -19,7 +19,7 @@
         <script type="text/babel">
 
             const Rovers = (props) => {
-                const listRovers = props.data.map((rover) => <li onClick={props.onClick} key={rover.name}>{rover.name}</li>);
+                const listRovers = props.data.map(rover => <li onClick={props.onClick} key={rover.name}>{rover.name}</li>);
                 
                 return <ul>{listRovers}</ul>
             }
@@ -37,7 +37,7 @@
             }
             
             const Home = (props) => {
-                const [rovers, setRovers] = React.useState({rovers});
+                const [rovers, setRovers] = React.useState({props.data});
                 const [currentRover, setCurrentRover] = React.useState({});
 
                 const selectRover = (event) => {
