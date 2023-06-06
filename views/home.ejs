@@ -36,6 +36,10 @@
                             <b>Mass:</b> <input type="text" mass="mass" value={props.rover.mass || ""} /> <br />
                             <b>Tools:</b> <input type="text" tools="tools" value={props.rover.tools || ""} /> <br />
                         </form>
+
+                        <button name="save" onClick={props.saveRover}>Save</button>&nbsp;
+                        <button name="clear" onClick={props.clearForm}>Clear</button>&nbsp;
+                        <button name="delete" onClick={props.deleteRover}>Delete</button>&nbsp;
                     </div>
                 )                
             }
@@ -44,11 +48,46 @@
                 const [rovers, setRovers] = React.useState(props.data);
                 const [currentRover, setCurrentRover] = React.useState({});
 
+                React.useEffect(() => {
+                    const fetchData = async () => {
+                        fetch("/api/add/:name").then(res => res.json())
+                            .then((json) => {
+                                setRovers(json);
+                            })
+                    }    
+                    fetchData()
+                }, []);
+
                 const selectRover = (event) => {
                     const found = rovers.find((rover) => {
                         return rover.name === event.target.innerText;
                     });
                     setCurrentRover(found);
+                }
+
+                const clearForm = () => {
+                    setCurrentRover({});
+                }
+
+                const saveRover = () => {
+                    if(!currentRover.name) {
+                        return;
+                    }
+                    fetch("/api/add/:name", {
+                        method: "POST",
+                        headers: { 'Content-Type': 'application/json'},
+                        body: JSON.stringify(currentRover)
+                    })
+                    .then(res => res.json())
+                    .then((data) => {
+                        if(!currentRover.name) {
+                            currentRover.name = data.name;
+                            setCurrentRover(currentRover);
+                            let newRovers = [...rovers];
+                            newRovers.push(currentRover);
+                            setRovers(newRovers);
+                        }
+                    })
                 }
                 
                 return (
