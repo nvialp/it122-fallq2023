@@ -65,9 +65,24 @@ app.get('/api/delete/:name', (req,res, next) => {
     });
 });
 
-app.get('/api/add/:name/:landed/:speed/:mass/:tools', (req,res, next) => {
+app.get('/api/add/', (req,res, next) => {
     // find & update existing item, or add new 
-    let name = req.params.name;
+    if(!req.body.name) {
+        let rover = new Rovers(req.body);
+        rover.save((err, newRover) => {
+            if(err) return next(err);
+            res.json({updated: 0, name: newRover.name});
+        });
+    }
+
+    else {
+        Rovers.updateOne({name: req.body.name}, {landed: req.body.landed, speed: req.body.speed, mass: req.body.mass, tools: req.body.tools}, (err, result) => {
+            if(err) return next(err);
+            res.json({updated: result.nModified, name: req.body.name});
+        });
+    }
+});
+    /*let name = req.params.name;
     Rovers.update({ name:name}, {name:name, landed: req.params.landed, speed: req.params.speed, mass:req.params.mass, tools:req.params.tools }, {upsert: true }, (err, result) => {
         if (err) return next(err);
         // nModified = 0 for new item, = 1+ for updated item 

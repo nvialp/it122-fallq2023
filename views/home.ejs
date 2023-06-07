@@ -30,11 +30,11 @@
                         <h3>Rover Details</h3>
                         
                         <form>
-                            <b>Name:</b> <input type="text" name="name" value={props.rover.name || ""} /> <br />
-                            <b>Landed:</b> <input type="text" landed="landed" value={props.rover.landed || ""} /> <br />
-                            <b>Speed:</b> <input type="text" speed="speed" value={props.rover.speed || ""} /> <br />
-                            <b>Mass:</b> <input type="text" mass="mass" value={props.rover.mass || ""} /> <br />
-                            <b>Tools:</b> <input type="text" tools="tools" value={props.rover.tools || ""} /> <br />
+                            <b>Name:</b> <input type="text" name="name" value={props.rover.name || ""} onChange={props.handleChange} /> <br />
+                            <b>Landed:</b> <input type="text" landed="landed" value={props.rover.landed || ""} onChange={props.handleChange} /> <br />
+                            <b>Speed:</b> <input type="text" speed="speed" value={props.rover.speed || ""} onChange={props.handleChange}/> <br />
+                            <b>Mass:</b> <input type="text" mass="mass" value={props.rover.mass || ""} onChange={props.handleChange}/> <br />
+                            <b>Tools:</b> <input type="text" tools="tools" value={props.rover.tools || ""} onChange={props.handleChange}/> <br />
                         </form>
 
                         <button name="save" onClick={props.saveRover}>Save</button>&nbsp;
@@ -73,7 +73,7 @@
                     if(!currentRover.name) {
                         return;
                     }
-                    fetch("/api/add/:name", {
+                    fetch("/api/add/", {
                         method: "POST",
                         headers: { 'Content-Type': 'application/json'},
                         body: JSON.stringify(currentRover)
@@ -81,11 +81,24 @@
                     .then(res => res.json())
                     .then((data) => {
                         if(!currentRover.name) {
-                            currentRover.name = data.name;
+                            currentRover.name = rover.name;
                             setCurrentRover(currentRover);
                             let newRovers = [...rovers];
                             newRovers.push(currentRover);
                             setRovers(newRovers);
+                        }
+                    })
+                }
+
+                const handleChange = (event) => {
+                    let newRover = { ... currentRover };
+                    newRover[event.target.name] = event.target.value;
+                    setCurrentRover(newRover);
+
+                    rovers.find((rover, index) => {
+                        if(rover.name == newRover.name) {
+                           rovers[index] = newRover;
+                            setRovers(rovers);
                         }
                     })
                 }
