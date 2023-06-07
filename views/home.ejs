@@ -90,6 +90,19 @@
                     })
                 }
 
+                const deleteRover = () => {
+                    let name = currentRover.name;
+                    fetch('/api/delet/${name}')
+                    .then(res => res.json())
+                    .then((data) => {
+                        const newRovers = rovers.filter((rover) => {
+                            return rover.name !== name;
+                        });
+                        setRovers(newRovers);
+                        setCurrentRover({})
+                    });
+                }
+
                 const handleChange = (event) => {
                     let newRover = { ... currentRover };
                     newRover[event.target.name] = event.target.value;
