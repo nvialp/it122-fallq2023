@@ -65,7 +65,7 @@ app.get('/api/delete/:name', (req,res, next) => {
     });
 });
 
-app.get('/api/add/', (req,res, next) => {
+app.post('/api/add/', (req,res, next) => {
     // find & update existing item, or add new 
     if(!req.body.name) {
         let rover = new Rovers(req.body);
