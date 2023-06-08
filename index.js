@@ -76,7 +76,7 @@ app.post('/api/add/', (req,res, next) => {
     }
 
     else {
-        Rovers.updateOne({name: req.body.name}, {landed: req.body.landed, speed: req.body.speed, mass: req.body.mass, tools: req.body.tools}, (err, result) => {
+        Rovers.updateOne({name: req.body.name}, {landed: req.body.landed, speed: req.body.speed, mass: req.body.mass, tools: req.body.tools},(err, result) => {
             if(err) return next(err);
             res.json({updated: result.nModified, name: req.body.name});
         });
