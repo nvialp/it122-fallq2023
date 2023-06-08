@@ -50,7 +50,7 @@
 
                 React.useEffect(() => {
                     const fetchData = async () => {
-                        fetch("/api/add/:name").then(res => res.json())
+                        fetch("/api/rovers").then(res => res.json())
                             .then((json) => {
                                 setRovers(json);
                             })
