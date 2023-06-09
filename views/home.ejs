@@ -31,10 +31,10 @@
                         
                         <form>
                             <b>Name:</b> <input type="text" name="name" value={props.rover.name || ""} onChange={props.handleChange} /> <br />
-                            <b>Landed:</b> <input type="text" landed="landed" value={props.rover.landed || ""} onChange={props.handleChange} /> <br />
-                            <b>Speed:</b> <input type="text" speed="speed" value={props.rover.speed || ""} onChange={props.handleChange}/> <br />
-                            <b>Mass:</b> <input type="text" mass="mass" value={props.rover.mass || ""} onChange={props.handleChange}/> <br />
-                            <b>Tools:</b> <input type="text" tools="tools" value={props.rover.tools || ""} onChange={props.handleChange}/> <br />
+                            <b>Landed:</b> <input type="text" name="landed" value={props.rover.landed || ""} onChange={props.handleChange} /> <br />
+                            <b>Speed:</b> <input type="text" name="speed" value={props.rover.speed || ""} onChange={props.handleChange}/> <br />
+                            <b>Mass:</b> <input type="text" name="mass" value={props.rover.mass || ""} onChange={props.handleChange}/> <br />
+                            <b>Tools:</b> <input type="text" name="tools" value={props.rover.tools || ""} onChange={props.handleChange}/> <br />
                         </form>
 
                         <button name="save" onClick={props.saveRover}>Save</button>&nbsp;

@@ -10,7 +10,7 @@ import cors from 'cors';
 const app = express();
 app.set('port', process.env.PORT || 3000);
 app.use(express.static('./public'));
-app.use(express.urlencoded());
+app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 app.use('/api', cors()); // set Access-Control-Allow-Origin header for api route
 app.set('view engine', 'ejs'); // set the view engine to ejs
@@ -36,9 +36,7 @@ app.get('/rover/:name', (req, res, next) => {
 //api's
 app.get('/api/rovers', (req, res, next) => {
     Rovers.find({}).then((err, result) => {
-        if(err) {
-            res.send(err);
-        }
+        if(err || !results) return next(err);
         res.json(result);
     });
 });
@@ -76,7 +74,7 @@ app.post('/api/add/', (req,res, next) => {
     }
 
     else {
-        Rovers.updateOne({name: req.body.name}, {landed: req.body.landed, speed: req.body.speed, mass: req.body.mass, tools: req.body.tools},(err, result) => {
+        Rovers.updateOne({name: req.body.name}, {landed: req.body.landed, speed: req.body.speed, mass: req.body.mass, tools: req.body.tools}, (err, result) => {
             if(err) return next(err);
             res.json({updated: result.nModified, name: req.body.name});
         });
